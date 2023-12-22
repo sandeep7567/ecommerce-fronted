@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Header from "@/components/Header";
 
 import StyledComponentsRegistry from "@/lib/registry";
@@ -7,7 +7,7 @@ import GlobalStyles from "@/styles/GlobalStyles";
 
 import { Providers } from "@/components/provider/Provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["devanagari"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
   title: "Ecommerce Fronted",
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <Providers>
           <StyledComponentsRegistry>
             <GlobalStyles />

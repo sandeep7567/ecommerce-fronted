@@ -10,7 +10,7 @@ import Center from "../Center";
 import Button from "@/components/Button";
 import { Icons } from "../Icons";
 import ButtonLink from "../ButtonLink";
-import { CartProvider } from "../provider/CartProvider";
+import { cartProvider } from "../provider/CartProvider";
 
 const Bg = styled.div`
   background-color: #222;
@@ -51,8 +51,9 @@ const Column = styled.div`
 `;
 
 const Featured:React.FC<any> = ({product}) => {
+
   // @ts-ignore
-  const {setCartProducts, addProduct} = useContext(CartProvider);
+  const {addProduct} = cartProvider();
 
   const {Cart} = Icons;
   const addFeatureToCart = () => {

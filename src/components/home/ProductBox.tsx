@@ -3,23 +3,23 @@ import { FC, useContext } from "react";
 import styled from "styled-components";
 import Button from "../Button";
 import Link from "next/link";
-import { CartProvider } from "../provider/CartProvider";
+import { CartContext } from "../provider/CartProvider";
 
 const ProductWrapper = styled.div``;
 
 const WhiteBox = styled(Link)`
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   height: 120px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  img {
+  /* img {
     max-width: 100%;
     max-height: 80px;
-  }
+  } */
 `;
 
 const Title = styled.h2`
@@ -48,19 +48,30 @@ const Price = styled.div`
 `;
 
 const ProductBox: FC<any> = ({ _id, title, description, price, images }) => {
-  const {addProduct} = useContext<any>(CartProvider);
+  const cartContext = useContext(CartContext);
+
+  if (!cartContext) {
+    return;
+  };
+
+  const {addProduct} = cartContext;
   
   const url = `product/${_id}`
   return (
     <ProductWrapper>
       <WhiteBox href={url}>
-        <div style={{position: "relative"}}>
+        <div>
           <Image
             src={images[0]}
             width={100}
             height={100}
             quality={100}
-            alt=""
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "contain",
+            }}
+            alt="image"
           />
         </div>
       </WhiteBox>

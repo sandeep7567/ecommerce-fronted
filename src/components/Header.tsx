@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 
 import Center from "@/components/Center";
-import { CartProvider } from "./provider/CartProvider";
+import { CartContext, cartProvider } from "./provider/CartProvider";
 
 const StyledHeader = styled.header`
   background-color: #222;
@@ -29,13 +29,14 @@ const StyledNav = styled.nav`
   gap: 0.9375rem;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   color: #aaa;
   text-decoration: none;
 `;
 
 const Header = () => {
-  const {cartProducts} = useContext<any>(CartProvider);
+  // @ts-ignore
+  const {cartProducts} = cartProvider();
 
   return (
     <StyledHeader>
@@ -46,8 +47,8 @@ const Header = () => {
           <NavLink href={"/"}>Home</NavLink>
           <NavLink href={"/products"}>All products</NavLink>
           <NavLink href={"/categories"}>Categories</NavLink>
-          <NavLink href={"account"}>Account</NavLink>
-          <NavLink href={"cart"}>Cart ({cartProducts.length})</NavLink>
+          <NavLink href={"/account"}>Account</NavLink>
+          <NavLink href={"/cart"}>Cart ({cartProducts.length})</NavLink>
         </StyledNav>
         </Wrapper>
       </Center>

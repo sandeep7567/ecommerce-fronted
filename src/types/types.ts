@@ -13,6 +13,8 @@ interface ButtonI {
   white?: boolean | 1 | 0;
   primary?: boolean | 1 | 0;
   size?: string;
+  block?: boolean | 1 | 0;
+  black?: boolean | 1 | 0;
 };
 
 // Product Models Types

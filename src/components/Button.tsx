@@ -1,8 +1,18 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 
 import { ChildrenI } from '@/types/types';
 import styled, { css } from 'styled-components';
 import { primary } from '@/lib/colors';
+
+interface ButtonI extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+  white?: boolean | 1 | 0;
+  primary?: boolean | 1 | 0;
+  outline?: boolean | 1 | 0;
+  block?: boolean | 1 | 0;
+  size?: 'l';
+  black?: boolean | 1 | 0;
+};
 
 export const ButtonStyle = css<ChildrenI>`
   border: 0;
@@ -19,6 +29,22 @@ export const ButtonStyle = css<ChildrenI>`
     height: 16px;
     margin-right: 5px;
   }
+  ${props => props.block && css`
+    display: block;
+    width: 100%;
+  `}
+  ${props => props.black && !props.outline && css`
+    background-color: #000;
+    &:hover {
+    opacity: 0.8;
+  }
+    color: #fff;
+  `}
+  ${props => props.black && props.outline && css`
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #000;
+  `}
   ${props => props.white && !props.outline && css`
     background-color: #fff;
     color: #000;
@@ -51,14 +77,6 @@ export const ButtonStyle = css<ChildrenI>`
 const StyledButton = styled.button<ChildrenI>`
   ${ButtonStyle}
 `;
-
-
-interface ButtonI extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
-  white?: boolean | 1 | 0;
-  primary?: boolean | 1 | 0;
-  outline?: boolean | 1 | 0;
-};
 
 const Button:React.FC<ButtonI> = ({children, ...props}:ButtonI ) => {
   return (
