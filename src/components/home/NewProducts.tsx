@@ -1,15 +1,9 @@
 "use client";
+
 import { FC } from "react";
 import styled from "styled-components";
 import Center from "@/components/Center";
-import ProductBox from "@/components/home/ProductBox";
-
-const ProductsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 40px;
-`;
+import ProductsGrid from "@/components/ProductsGrid";
 
 const Title = styled.h2`
   font-size: 2rem;
@@ -21,11 +15,7 @@ const NewProducts: FC<any> = ({ products }) => {
   return (
     <Center>
       <Title>New Arrivals</Title>
-      <ProductsGrid>
-        {products.map((product: any) => (
-          <ProductBox {...product} />
-        ))}
-      </ProductsGrid>
+      <ProductsGrid products={products}  />
     </Center>
   );
 };

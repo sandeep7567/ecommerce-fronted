@@ -2,10 +2,15 @@ import Image from "next/image";
 import { FC, useContext } from "react";
 import styled from "styled-components";
 import Button from "../Button";
-import Link from "next/link";
 import { CartContext } from "../provider/CartProvider";
 
-const ProductWrapper = styled.div``;
+import Link from "next/link";
+
+const ProductWrapper = styled.div`
+  /* width: 100%;
+  text-align: center;
+  justify-content: center; */
+`;
 
 const WhiteBox = styled(Link)`
   background-color: #fff;
@@ -16,10 +21,6 @@ const WhiteBox = styled(Link)`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  /* img {
-    max-width: 100%;
-    max-height: 80px;
-  } */
 `;
 
 const Title = styled.h2`
@@ -43,8 +44,12 @@ const PriceRow = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 600;
+  @media screen and (min-width: 768px) {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
 `;
 
 const ProductBox: FC<any> = ({ _id, title, description, price, images }) => {
@@ -54,13 +59,14 @@ const ProductBox: FC<any> = ({ _id, title, description, price, images }) => {
     return;
   };
 
-  const {addProduct} = cartContext;
-  
-  const url = `product/${_id}`
+  const { addProduct } = cartContext;
+
+  const url = `/product/${_id}`;
+
   return (
     <ProductWrapper>
       <WhiteBox href={url}>
-        <div>
+        <div className="">
           <Image
             src={images[0]}
             width={100}
@@ -78,12 +84,10 @@ const ProductBox: FC<any> = ({ _id, title, description, price, images }) => {
       <ProductInfoBox>
         <Title>{title}</Title>
         <PriceRow>
-          <Price>
-            ${price}
-          </Price>
+          <Price>${price}</Price>
           <Button onClick={() => addProduct(_id)} primary outline>
-          Add to cart
-        </Button>
+            Add to cart
+          </Button>
         </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>

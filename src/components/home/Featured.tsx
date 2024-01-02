@@ -21,7 +21,10 @@ const Bg = styled.div`
 const Title = styled.h1`
   margin: 0;
   font-weight: normal;
-  font-size: 3rem;
+  font-size: 1.5rem;
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const Desc = styled.p`
@@ -31,10 +34,25 @@ const Desc = styled.p`
 
 const ColumnsWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 40;
   img {
     max-width: 100%;
+    max-height: 350px;
+    display: block;
+    margin: 0 auto;
+  }
+  div:nth-child(1) {
+    order: 2;
+  }
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.1fr 0.9fr;
+    div:nth-child(1) {
+      order: 0;
+    }
+    img {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -50,14 +68,13 @@ const Column = styled.div`
   justify-content: center;
 `;
 
-const Featured:React.FC<any> = ({product}) => {
-
+const Featured: React.FC<any> = ({ product }) => {
   // @ts-ignore
-  const {addProduct} = cartProvider();
+  const { addProduct } = cartProvider();
 
-  const {Cart} = Icons;
+  const { Cart } = Icons;
   const addFeatureToCart = () => {
-    addProduct(product?._id)
+    addProduct(product?._id);
   };
 
   return (
@@ -67,17 +84,16 @@ const Featured:React.FC<any> = ({product}) => {
           <Column>
             <div>
               <Title>{product?.title}</Title>
-              <Desc>
-                {product?.description} 
-              </Desc>
+              <Desc>{product?.description}</Desc>
               <ButtonsWrapper>
-                <ButtonLink href={`/products/${product?._id}`} outline={1} white={1}>
+                <ButtonLink
+                  href={`/product/${product?._id}`}
+                  outline={1}
+                  white={1}
+                >
                   Read more
                 </ButtonLink>
-                <Button
-                  onClick={addFeatureToCart}
-                  white
-                >
+                <Button onClick={addFeatureToCart} white>
                   <Cart />
                   Add to cart
                 </Button>

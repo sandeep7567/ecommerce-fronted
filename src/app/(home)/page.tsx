@@ -3,7 +3,7 @@ import NewProducts from "@/components/home/NewProducts";
 import { dbConnect } from "@/lib/dbConnect";
 import { Product } from "@/models/Product";
 
-export default async function Page() {
+export default async function Home() {
   // productById
   const featurePrductId = "657c6d9de8292d8cab045ea9";
   await dbConnect();

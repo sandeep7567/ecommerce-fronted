@@ -5,6 +5,7 @@ export async function POST(req:Request) {
 
   await dbConnect();
   
+  // array of products ids
   const {ids} = await req.json();
 
   const data = await Product.find({_id: ids});
